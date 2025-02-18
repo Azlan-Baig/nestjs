@@ -16,21 +16,22 @@ export class PostsService {
   }
   async getPostById(id: number): Promise<Post | null> {
     return this.prisma.post.findUnique({
-      where: { id },
+      where: { id: Number(id) },
     });
   }
   async updatePost(id: number, title: string, content: string): Promise<Post> {
     return this.prisma.post.update({
-      where: { id },
+      where: { id : Number(id) },
       data: {
         title,
         content,
       },
     });
   }
-  async deletePost(id:number): Promise<Post> {
+  async deletePost(id: number): Promise<Post> {
     return this.prisma.post.delete({
-        where: {id}
-    })
-}
+      where: { id : Number(id) },
+    });
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { Post as PostModel } from '@prisma/client';
 import { title } from 'process';
@@ -14,7 +14,6 @@ export class PostsController {
     return this.postservice.createPost(title, content, authorId);
   }
   @Get()
-  
   async getAllPosts(): Promise<PostModel[]> {
     return this.postservice.getAllPosts();
   }
@@ -23,5 +22,17 @@ export class PostsController {
   async getOnePost(@Param('id') id: number): Promise<PostModel | null> {
     return this.postservice.getPostById(id);
   }
-  
+
+  @Put(':id')
+  async Update(
+    @Body('title') title: string,
+    @Body('content') content: string,
+    @Param('id') id: number,
+  ) {
+    return this.postservice.updatePost(id, title, content);
+  }
+  @Delete(':id')
+  async delete(@Param('id') id: number) {
+    return this.postservice.deletePost(id);
+  }
 }
