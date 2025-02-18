@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { Post as PostModel } from '@prisma/client';
-import { title } from 'process';
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postservice: PostsService) {}
